@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Generador de WODs — CrossFit</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<header>
+  <div class="header-bar"></div>
+  <div>
+    <h1>Generador de <span>WODs</span></h1>
+    <p>CrossFit · Individual &amp; Equipos</p>
+  </div>
+</header>
+
+<div class="container">
+
+  <!-- ── PANEL CONFIGURADOR ── -->
+  <div class="config-panel">
+    <div class="panel-title">Configurar WOD</div>
+
+    <div class="form-group">
+      <label>Modalidad</label>
+      <div class="mode-toggle">
+        <button class="mode-btn active" id="btn-individual" onclick="setMode('individual')">Individual</button>
+        <button class="mode-btn" id="btn-equipo" onclick="setMode('equipo')">Equipo</button>
+      </div>
+    </div>
+
+    <div class="form-group team-config" id="team-config">
+      <label>Cantidad de atletas</label>
+      <select id="team-size">
+        <option value="2">2 atletas</option>
+        <option value="3" selected>3 atletas</option>
+        <option value="4">4 atletas</option>
+        <option value="5">5 atletas</option>
+        <option value="6">6 atletas</option>
+      </select>
+    </div>
+
+    <div class="form-group team-config" id="team-style-config">
+      <label>Estilo de equipo</label>
+      <select id="team-style">
+        <option value="relay">Relay (de a uno por vez)</option>
+        <option value="sync">Sincronizado (todos juntos)</option>
+        <option value="partition">Partición libre (dividen reps)</option>
+        <option value="mixed">Mixto</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label>Formato</label>
+      <select id="formato">
+        <option value="amrap">AMRAP</option>
+        <option value="fortime">For Time</option>
+        <option value="emom">EMOM</option>
+        <option value="chipper">Chipper</option>
+        <option value="tabata">Tabata</option>
+        <option value="rft">Rounds For Time</option>
+        <option value="random">Sorpresa (aleatorio)</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label>Nivel</label>
+      <select id="nivel">
+        <option value="principiante">Principiante</option>
+        <option value="intermedio" selected>Intermedio</option>
+        <option value="avanzado">Avanzado</option>
+        <option value="rx">RX / Competencia</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label>Duración / Time cap</label>
+      <select id="duracion">
+        <option value="8">8 minutos</option>
+        <option value="10">10 minutos</option>
+        <option value="12">12 minutos</option>
+        <option value="15" selected>15 minutos</option>
+        <option value="20">20 minutos</option>
+        <option value="25">25 minutos</option>
+        <option value="30">30 minutos</option>
+        <option value="40">40 minutos</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label>Categorías de movimientos</label>
+      <div class="checkbox-grid">
+        <label class="checkbox-item">
+          <input type="checkbox" id="cat-cardio" checked>
+          <span class="checkbox-box"></span>
+          <span class="checkbox-label">Cardio / Mono</span>
+        </label>
+        <label class="checkbox-item">
+          <input type="checkbox" id="cat-gym" checked>
+          <span class="checkbox-box"></span>
+          <span class="checkbox-label">Gimnasia</span>
+        </label>
+        <label class="checkbox-item">
+          <input type="checkbox" id="cat-peso" checked>
+          <span class="checkbox-box"></span>
+          <span class="checkbox-label">Halterofilia</span>
+        </label>
+        <label class="checkbox-item">
+          <input type="checkbox" id="cat-core">
+          <span class="checkbox-box"></span>
+          <span class="checkbox-label">Core / Suelo</span>
+        </label>
+        <label class="checkbox-item">
+          <input type="checkbox" id="cat-oly">
+          <span class="checkbox-box"></span>
+          <span class="checkbox-label">Olímpico</span>
+        </label>
+        <label class="checkbox-item">
+          <input type="checkbox" id="cat-odd">
+          <span class="checkbox-box"></span>
+          <span class="checkbox-label">Odd Objects</span>
+        </label>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="form-group">
+      <label>Cantidad de movimientos</label>
+      <div class="range-row">
+        <div>
+          <label style="font-size:10px;color:#666;margin-bottom:4px;display:block">Mínimo</label>
+          <input type="number" id="mov-min" value="3" min="2" max="8">
+        </div>
+        <div>
+          <label style="font-size:10px;color:#666;margin-bottom:4px;display:block">Máximo</label>
+          <input type="number" id="mov-max" value="5" min="2" max="10">
+        </div>
+      </div>
+    </div>
+
+    <button class="btn-generate" onclick="generarWOD()">⚡ Generar WOD</button>
+  </div>
+
+  <!-- ── PANEL RESULTADO ── -->
+  <div class="wod-panel">
+    <div class="wod-empty" id="wod-empty">
+      <div class="icon">🏋️</div>
+      <p>Configurá y generá tu WOD</p>
+    </div>
+    <div id="wod-output" style="display:none"></div>
+
+    <div class="history-section" id="history-section" style="display:none">
+      <div class="history-title">WODs generados hoy</div>
+      <div class="history-grid" id="history-list"></div>
+    </div>
+  </div>
+
+</div>
+
+<script src="js/wod.js"></script>
+</body>
+</html>
